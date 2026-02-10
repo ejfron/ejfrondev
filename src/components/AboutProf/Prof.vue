@@ -56,8 +56,8 @@ export default {
                     <div class="foot-cv">
                         
                         <a class="title-cv" 
-                        href="Jugado_Ejfron_Resume.pdf" 
-                        download="Jugado_Ejfron_Resume.pdf" 
+                        href="Jugado_Ejfron_Resume (2).pdf" 
+                        download="Jugado_Ejfron_Resume (2).pdf" 
                         title="Jugado_Ejfron_Resume"
         target="_blank"
                         
