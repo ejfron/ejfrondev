@@ -56,7 +56,7 @@ export default {
                     <div class="foot-cv">
                         
                         <a class="title-cv" 
-                           href="/public/JUGADO_JR,_EDGAR_P_Resume (2).pdf" 
+                            href="/public/resume-jugado.pdf" 
                         download 
                         
         target="_blank"
