@@ -58,7 +58,7 @@ export default {
                         <a class="title-cv" 
                            href="/public/JUGADO_JR,_EDGAR_P_Resume (2).pdf" 
                         download 
-                        title="Jugado_Ejfron_Resume"
+                        
         target="_blank"
                         
                         >Download Cv</a>
