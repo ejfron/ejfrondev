@@ -237,7 +237,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
    --border-color: #f4f4f4e8;
     --line-span: #10c010;
       --bubbles: #51fc9025;
-         --profile: linear-gradient(to bottom,#ffffff 0%,#78cc6d 100%);
+         --profile: linear-gradient(to bottom,#01010125 0%,#ffff 100%);
 }
 
 
