@@ -32,7 +32,7 @@ export default {
         <div class="prof-cardValue">
                 <div class="head-cardValue">
                     <div class="card-image">
-                        <img src="./image/50c28f86-788c-4767-8111-395d8ad71361.jpg" alt="Edgar Jugado" class="imagePort">
+                         <img src="./image/df1de514-29bd-4f30-bd84-990509e46e6b-removebg-preview.png" alt="Edgar Jugado" class="imagePort">
                     </div>
                 </div>
                 <div class="section-cardValue">
@@ -149,9 +149,9 @@ border-radius: 10px;
       width: 100%;
     height: 25rem;
     clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
-    background-color: aliceblue;
+    background: var(--profile);
     overflow: hidden; /* Important for clipped images */
-     border-right: 5px solid #10c310c8;
+   
 }
 
 .card-image {
@@ -165,7 +165,7 @@ border-radius: 10px;
 
 .imagePort {
     width: 100%;
-    height: 100%;
+    max-width: 300px;
     object-fit: cover; 
     object-position: center; 
 }
