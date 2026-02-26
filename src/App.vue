@@ -219,6 +219,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   --hover-prof: #0000005a;
   --line-span: #0000004c;
   --bubbles: rgba(255, 255, 255, 0.374);
+         --profile: linear-gradient(to bottom,#ffffff 0%,#78cc6d 100%);
 }
 
 /* 2. Define Dark Mode Overrides */
@@ -236,6 +237,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
    --border-color: #f4f4f4e8;
     --line-span: #10c010;
       --bubbles: #51fc9025;
+         --profile: linear-gradient(to bottom,#ffffff 0%,#78cc6d 100%);
 }
 
 
