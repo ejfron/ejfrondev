@@ -189,7 +189,7 @@
 
             <div class="button">
                 <a 
-            href="/public/JUGADO_JR,_EDGAR_P_Resume (2).pdf" 
+             href="/public/resume-jugado.pdf"  
         download
         class="download-btn"
         
