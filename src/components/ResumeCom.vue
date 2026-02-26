@@ -192,7 +192,7 @@
             href="/public/JUGADO_JR,_EDGAR_P_Resume (2).pdf" 
         download
         class="download-btn"
-        title="Jugado_Ejfron_Resume.pdf"
+        
         target="_blank">
         Download Resume
     </a>
