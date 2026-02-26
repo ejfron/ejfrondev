@@ -190,7 +190,7 @@
             <div class="button">
                 <a 
             href="/public/JUGADO_JR,_EDGAR_P_Resume (2).pdf" 
-        download="/Jugado_Ejfron_Resume.pdf" 
+        download
         class="download-btn"
         title="Jugado_Ejfron_Resume.pdf"
         target="_blank">
