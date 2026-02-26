@@ -189,8 +189,8 @@
 
             <div class="button">
                 <a 
-             href="/public/resume-jugado.pdf"  
-        download
+              href="/public/resume-jugado.pdf" 
+            download="resume-jugado.pdf" 
         class="download-btn"
         
         target="_blank">
