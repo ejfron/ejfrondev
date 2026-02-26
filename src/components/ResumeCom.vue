@@ -190,7 +190,7 @@
             <div class="button">
                 <a 
         href="Jugado_Ejfron_Resume.pdf" 
-        download="Jugado_Ejfron_Resume.pdf" 
+        download="/Jugado_Ejfron_Resume.pdf" 
         class="download-btn"
         title="Jugado_Ejfron_Resume.pdf"
         target="_blank">
