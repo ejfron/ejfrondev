@@ -33,7 +33,7 @@ export default {
             <!-- Hero Section -->
             <div class="hero-section">
                 <div class="title-section">
-                    <h2 class="title-head">Web Developer</h2>
+                    <h2 class="title-head">Software Developer</h2>
                     <p class="location">Philippines, Rizal</p>
                 </div>
                 
