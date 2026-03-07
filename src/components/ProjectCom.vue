@@ -32,7 +32,7 @@ export default {
               An enhanced version of tic-tac-toe with multiplayer support for up to four players. Includes chain reaction mechanics where moves impact surrounding cells.
             </p>
             <div class="languageUse">
-              <span class="tech_badge">Html5</span>
+              <span class="tech_badge">Vanilla Js</span>
               <span class="tech_badge">Express Js</span>
               <span class="tech_badge">Tailwind</span>
             </div>
