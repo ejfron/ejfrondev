@@ -77,19 +77,19 @@ function generateReply(rawMsg) {
   if (hasKeyword(msg, ['hello', 'hi', 'hey']))
     return "Hi there! 👋 Thanks for visiting. You can ask me about my work, skills, or experience. I’m happy to share and help you learn more about what I do!"
 
-  if (hasKeyword(msg, ['tech stack', 'stack', 'technologies', 'tools', 'frameworks', 'libraries']))
+  if (hasKeyword(msg, ['tech stack', 'stack', 'technologies', 'tools', 'frameworks', 'libraries', 'languages', 'programming languages', 'what do you use', 'what technologies do you use', 'what tools do you use', 'what frameworks do you use', 'what libraries do you use', 'what programming languages do you use', 'what languages do you use', 'what is your tech stack', 'what technologies do you specialize in', 'what tools do you specialize in', 'what frameworks do you specialize in', 'what libraries do you specialize in', 'what programming languages do you specialize in', 'what languages do you specialize in']))
     return "I specialize in modern web technologies. My core tech stack includes Vue.js for dynamic front-end, Tailwind CSS for responsive designs, and JavaScript for interactive functionality."
 
-  if (hasKeyword(msg, ['about yourself', 'who are you', 'yourself']))
+  if (hasKeyword(msg, ['about yourself', 'who are you', 'yourself', 'what is your name', 'tell me about yourself', 'background', 'experience', 'bio', 'biography', 'introduce yourself', 'who are you?', 'what is your background', 'what is your experience', 'what is your bio', 'what is your biography', 'can you introduce yourself', 'can you tell me about yourself']))
     return "I’m Edgar, a dedicated full stack developer with a passion for turning ideas into fully functional web applications. I focus on clean code, optimized performance, and practical solutions."
 
-  if (hasKeyword(msg, ['projects', 'work', 'portfolio']))
+  if (hasKeyword(msg, ['projects', 'work', 'portfolio', 'examples', 'show me your work', 'what projects have you worked on', 'can you show me your projects', 'can you tell me about your projects', 'what have you worked on', 'what is your portfolio', 'can you show me your portfolio']))
     return "I have worked on various web projects, from interactive websites to practical applications. You can see detailed examples in my portfolio."
 
-  if (hasKeyword(msg, ['contact', 'email']))
+  if (hasKeyword(msg, ['contact', 'email', 'reach you', 'how can i contact you', 'how can i reach you', 'what is your email', 'can i contact you', 'can i reach you', 'can i email you']))
     return "You can reach me at ejfron.dev@gmail.com for professional inquiries or collaboration opportunities."
 
-  if (hasKeyword(msg, ['skills']))
+  if (hasKeyword(msg, ['skills', 'abilities', 'expertise', 'what are your skills', 'what skills do you have', 'what are your abilities', 'what is your expertise', 'can you tell me about your skills', 'can you tell me about your abilities', 'can you tell me about your expertise']))
     return "My main skills include Vue.js, JavaScript, and Node.js. I continuously learn frameworks and best practices in modern web development. I’m also proficient in responsive design, API integration, and version control with Git."
 
   return "I’m sorry, I didn’t catch that. Could you rephrase your question or ask about my skills, projects, or contact info?"
