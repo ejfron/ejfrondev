@@ -80,7 +80,7 @@ function generateReply(rawMsg) {
   if (hasKeyword(msg, ['tech stack', 'stack', 'technologies', 'tools', 'frameworks', 'libraries', 'languages', 'programming languages', 'what do you use', 'what technologies do you use', 'what tools do you use', 'what frameworks do you use', 'what libraries do you use', 'what programming languages do you use', 'what languages do you use', 'what is your tech stack', 'what technologies do you specialize in', 'what tools do you specialize in', 'what frameworks do you specialize in', 'what libraries do you specialize in', 'what programming languages do you specialize in', 'what languages do you specialize in']))
     return "I specialize in modern web technologies. My core tech stack includes Vue.js for dynamic front-end, Tailwind CSS for responsive designs, and JavaScript for interactive functionality."
 
-  if (hasKeyword(msg, ['about yourself', 'who are you', 'yourself', 'what is your name', 'tell me about yourself', 'background', 'experience', 'bio', 'biography', 'introduce yourself', 'who are you?', 'what is your background', 'what is your experience', 'what is your bio', 'what is your biography', 'can you introduce yourself', 'can you tell me about yourself']))
+  if (hasKeyword(msg, ['about yourself', 'name', 'who are you', 'yourself', 'what is your name', 'tell me about yourself', 'background', 'experience', 'bio', 'biography', 'introduce yourself', 'who are you?', 'what is your background', 'what is your experience', 'what is your bio', 'what is your biography', 'can you introduce yourself', 'can you tell me about yourself']))
     return "I’m Edgar, a dedicated full stack developer with a passion for turning ideas into fully functional web applications. I focus on clean code, optimized performance, and practical solutions."
 
   if (hasKeyword(msg, ['projects', 'work', 'portfolio', 'examples', 'show me your work', 'what projects have you worked on', 'can you show me your projects', 'can you tell me about your projects', 'what have you worked on', 'what is your portfolio', 'can you show me your portfolio']))
@@ -144,7 +144,7 @@ function sendMessage() {
 
     saveMessages()
     scrollToBottom()
-  }, 1000)
+  }, 4000)
 }
 
 /* ========================= QUICK BUTTONS ========================= */
