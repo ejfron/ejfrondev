@@ -90,7 +90,7 @@ function generateReply(rawMsg) {
     return "You can reach me at ejfron.dev@gmail.com for professional inquiries or collaboration opportunities."
 
   if (hasKeyword(msg, ['skills']))
-    return "My main skills include HTML, CSS, Tailwind CSS, and JavaScript. I continuously learn frameworks and best practices in modern web development."
+    return "My main skills include Vue.js, JavaScript, and Node.js. I continuously learn frameworks and best practices in modern web development. I’m also proficient in responsive design, API integration, and version control with Git."
 
   return "I’m sorry, I didn’t catch that. Could you rephrase your question or ask about my skills, projects, or contact info?"
 }
