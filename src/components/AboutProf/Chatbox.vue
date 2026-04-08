@@ -84,7 +84,7 @@ function generateReply(rawMsg) {
     return "I’m Edgar, a dedicated full stack developer with a passion for turning ideas into fully functional web applications. I focus on clean code, optimized performance, and practical solutions."
 
   if (hasKeyword(msg, ['projects', 'work', 'portfolio', 'examples', 'show me your work', 'what projects have you worked on', 'can you show me your projects', 'can you tell me about your projects', 'what have you worked on', 'what is your portfolio', 'can you show me your portfolio']))
-    return "I have worked on various web projects, from interactive websites to practical applications. You can see detailed examples in my portfolio."
+    return "Absolutely! im open to work and have experience in various web projects, from interactive websites to practical applications. You can see detailed examples in my portfolio."
 
   if (hasKeyword(msg, ['contact', 'email', 'reach you', 'how can i contact you', 'how can i reach you', 'what is your email', 'can i contact you', 'can i reach you', 'can i email you']))
     return "You can reach me at ejfron.dev@gmail.com for professional inquiries or collaboration opportunities."
