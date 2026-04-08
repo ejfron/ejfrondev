@@ -306,7 +306,7 @@ const latestButtons = computed(() => {
   height: 8px;
   background-color: #4cd137;
   border-radius: 50%;
-  margin-left: auto;
+ 
 }
 
 .iconClose {
