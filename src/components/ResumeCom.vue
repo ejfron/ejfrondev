@@ -57,6 +57,12 @@
           
         <div class="PG">JavaScript</div>
     </span>
+      <span class="skill-tag">
+        
+            <i class="devicon-nuxtjs-plain"></i>
+          
+        <div class="PG">Nuxt Js</div>
+    </span>
     <span class="skill-tag">
         
             <i class="devicon-vuejs-plain"></i>
@@ -78,6 +84,14 @@
           
         <div class="PG">Git</div>
     </span>
+      <span class="skill-tag">
+        
+            <i class="devicon-vite-plain"></i>
+          
+        <div class="PG">Vite</div>
+    </span>
+
+    
     <span class="skill-tag">
         
             <i class="devicon-mysql-original"></i>
@@ -108,12 +122,7 @@
           
         <div class="PG">Express Js</div>
     </span>
-    <span class="skill-tag">
-        
-            <i class="devicon-nuxtjs-plain"></i>
-          
-        <div class="PG">Nuxt Js</div>
-    </span>
+  
       <span class="skill-tag">
         
            
@@ -121,6 +130,18 @@
           
           
         <div class="PG">Figma</div>
+    </span>
+      <span class="skill-tag">
+        
+            <i class="devicon-github-plain"></i>
+          
+        <div class="PG">Github</div>
+    </span>
+      <span class="skill-tag">
+        
+            <i class="devicon-vercel-plain"></i>
+          
+        <div class="PG">Vercel</div>
     </span>
      <span class="skill-tag">
         
@@ -179,9 +200,9 @@
                     </div>
                     
                     <div class="wrapSecProject">
-                        <div class="wrapProjectHead">Janosa National High School Website</div>
+                        <div class="wrapProjectHead">Craft Learn Site | URS</div>
                         <div class="wrapProjectDesc">
-                            Developed a comprehensive and user-friendly website for the school, aimed at enhancing communication and accessibility for the school community. The website serves as an information hub.
+                            Created a user-friendly website for the University of Rizal System Morong Craft Learn project, utilizing Vuejs, CSS, and Vue Router to provide an engaging platform for students to access educational resources.
                         </div>
                     </div>
                 </div>
@@ -189,7 +210,7 @@
 
             <div class="button">
                 <a 
-              href="/public/resume-jugado.pdf" 
+              href="/resume-jugado.pdf" 
             download="resume-jugado.pdf" 
         class="download-btn"
         

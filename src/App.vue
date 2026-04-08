@@ -5,8 +5,10 @@ import { useRouter } from 'vue-router'
 import Profile from '@/components/AboutProf/Prof.vue'
 import NavCom from '@/components/AboutProf/nav.vue'
 import Resize from '@/components/MainContentResize.vue'
-import LoadingPage from '@/components/AboutProf/loading.vue'
+
+import Chatbox from './components/AboutProf/Chatbox.vue'
 // import ModalControler from '@/components/AboutProf/modalController.vue'
+
 
 const isSmallScreen = ref(window.innerWidth <= 1380) 
 const routerContainer = ref(null)
@@ -48,13 +50,7 @@ watch(
 
 onMounted(() => {
   window.addEventListener('resize', updateSize)
-  
 
-  setTimeout(() => {
-    loading.value = false
-
-    nextTick(scrollIfDesktop)
-  }, 1000)
 })
 
 onUnmounted(() => {
@@ -64,11 +60,14 @@ onUnmounted(() => {
 
 <template>
   <div id="app">
+
+
     <!-- <ModalControler /> -->
     <LoadingPage />
 
     <!-- Desktop layout -->
     <div class="Desktop" v-if="!isSmallScreen && !loading">
+      <Chatbox />
       <div class="groupPage">
         <NavCom />
         <Profile />
@@ -82,6 +81,7 @@ onUnmounted(() => {
 
     <!-- Mobile layout -->
     <div v-else class="ResizeGroup">
+        <Chatbox />
       <div class="groupPage">
         <NavCom />
         <Profile />
@@ -103,6 +103,40 @@ onUnmounted(() => {
   *{
     font-family: "Poppins", sans-serif;
   }
+
+ .visitor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  margin: 20px;
+  border: 2px solid #ffff;
+  z-index: 10;
+  right: 1rem;
+  bottom: 1rem;
+  
+  background: var(--bg-color-body);
+  color: #fff;
+  
+  border-radius: 12px;
+
+  
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.visitor h2 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Hover effect */
+.visitor:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
 
   .groupPage{
     display: flex;
@@ -218,12 +252,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   --border-color: #0000005a;
   --hover-prof: #0000005a;
   --line-span: #0000004c;
+  --messageUser: #ffff;
   --bubbles: rgba(255, 255, 255, 0.374);
          --profile: linear-gradient(to bottom,#ffffff 0%,#78cc6d 100%);
 }
 
 /* 2. Define Dark Mode Overrides */
 .dark-mode {
+   --messageUser: #ffff;
   --bg-color: #272626;  
    --bg-color-body: linear-gradient(to bottom right,#111 0%,#111 100%);      /* Dark background */
   --card-bg: #40404725;       /* Darker nav blocks */

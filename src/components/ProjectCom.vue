@@ -36,7 +36,7 @@ export default {
               <span class="tech_badge">Express Js</span>
               <span class="tech_badge">Tailwind</span>
             </div>
-            <a href="#" class="website_btn">
+            <a href="https://tictactoe-explosion.vercel.app/" target="_blank" class="website_btn">
               <Globe :size="16" />
               Website
             </a>
@@ -59,7 +59,7 @@ export default {
               <span class="tech_badge">Shadcn</span>
               <span class="tech_badge">Tailwind</span>
             </div>
-            <a href="#" class="website_btn">
+            <a href="https://demosite-craftlearn-urs.vercel.app/" target="_blank" class="website_btn">
               <Globe :size="16" />
               Website
             </a>

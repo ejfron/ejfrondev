@@ -101,9 +101,9 @@ export default {
                             <ChevronsLeftRightEllipsis color="#ffffff" :size="40" />
                         </div>
                         <div class="service-content">
-                            <div class="service-head">WordPress Development</div>
+                            <div class="service-head">WordPress & Wix Development</div>
                             <div class="service-desc">
-                                Custom WordPress themes, plugins, and full website development 
+                                Custom WordPress & Wix themes, plugins, and full website development 
                                 with CMS capabilities.
                             </div>
                         </div>
