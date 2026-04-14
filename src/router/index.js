@@ -3,6 +3,7 @@ import ProfileContact from '@/components/ContactCom.vue'
 import Resume from '@/components/ResumeCom.vue' 
 import Home from '@/components/HomeCom.vue' 
 import Project from '@/components/ProjectCom.vue'
+import NotFound from '@/components/404.vue'
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     name: 'ProfileContact',
     component: ProfileContact,
     meta: { scrollTo: '#contact' }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import Profile from '@/components/AboutProf/Prof.vue'
 import NavCom from '@/components/AboutProf/nav.vue'
 import Resize from '@/components/MainContentResize.vue'
+import NotFound from '@/components/404.vue'
 
 import Chatbox from './components/AboutProf/Chatbox.vue'
 // import ModalControler from '@/components/AboutProf/modalController.vue'
@@ -18,6 +19,12 @@ const router = useRouter()
 const updateSize = () => {
   isSmallScreen.value = window.innerWidth <= 1380
 }
+
+import { computed } from 'vue'
+
+const isNotFound = computed(() => {
+  return router.currentRoute.value.name === 'NotFound'
+})
 
 
 const scrollIfDesktop = () => {
@@ -65,7 +72,8 @@ onUnmounted(() => {
     <!-- <ModalControler /> -->
     <LoadingPage />
 
-    <!-- Desktop layout -->
+<div class="Catched" v-if="!isNotFound">
+      <!-- Desktop layout -->
     <div class="Desktop" v-if="!isSmallScreen && !loading">
       <Chatbox />
       <div class="groupPage">
@@ -90,7 +98,15 @@ onUnmounted(() => {
         <Resize class="Content" />
       </div>
     </div>
+</div>
+<div class="Catched404" v-else>
+  <NotFound />
+</div>
+
+
   </div>
+
+
 </template>
 
 
