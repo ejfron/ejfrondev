@@ -233,8 +233,8 @@ const latestButtons = computed(() => {
 /* Wrapper */
 .chat-wrapper {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom:-50px;
+  right: -55px;
   z-index: 999;
 }
 

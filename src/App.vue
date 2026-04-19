@@ -6,6 +6,7 @@ import Profile from '@/components/AboutProf/Prof.vue'
 import NavCom from '@/components/AboutProf/nav.vue'
 import Resize from '@/components/MainContentResize.vue'
 import NotFound from '@/components/404.vue'
+import LoadingPage from '@/components/AboutProf/loading.vue'
 
 import Chatbox from './components/AboutProf/Chatbox.vue'
 // import ModalControler from '@/components/AboutProf/modalController.vue'
@@ -15,6 +16,15 @@ const isSmallScreen = ref(window.innerWidth <= 1380)
 const routerContainer = ref(null)
 const mobileRouterContainer = ref(null)
 const router = useRouter()
+
+const isLoading = ref(true)
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false
+  }, 7500)
+})
+
 
 const updateSize = () => {
   isSmallScreen.value = window.innerWidth <= 1380
@@ -69,10 +79,12 @@ onUnmounted(() => {
   <div id="app">
 
 
-    <!-- <ModalControler /> -->
-    <LoadingPage />
+     <div v-if="isLoading" class="loading">
+      <LoadingPage />
+    </div>
+    <div v-else class="contentloading">
 
-<div class="Catched" v-if="!isNotFound">
+      <div class="Catched" v-if="!isNotFound">
       <!-- Desktop layout -->
     <div class="Desktop" v-if="!isSmallScreen && !loading">
       <Chatbox />
@@ -81,9 +93,12 @@ onUnmounted(() => {
         <Profile />
       </div>
       <router-view v-slot="{ Component }">
-        <div class="Router" ref="routerContainer">
-          <component :is="Component" />
+        <transitionc class="contentloading">
+          <div  class="Router" ref="routerContainer">
+          <component class="contentloading" :is="Component" />
         </div>
+        </transitionc>
+        
       </router-view>
     </div>
 
@@ -102,6 +117,11 @@ onUnmounted(() => {
 <div class="Catched404" v-else>
   <NotFound />
 </div>
+
+    </div>
+
+
+
 
 
   </div>
@@ -317,21 +337,36 @@ background: var(--bg-color-body);
     z-index: 0;
 }
 
-
+/* we will explain what these classes do next! */
 .v-enter-active,
 .v-leave-active {
-    transform: translateX(100px);
-  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
-    transform: translateX(-100px);
   opacity: 0;
 }
 
-
 /* 1. Transition durations */
 
+.contentloading > * {
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+}
 
+.contentloading > *:nth-child(1) { animation-delay: 0.15s; }
+.contentloading > *:nth-child(2) { animation-delay: 0.25s; }
+.contentloading > *:nth-child(3) { animation-delay: 0.35s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
