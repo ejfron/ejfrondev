@@ -25,6 +25,40 @@ onMounted(() => {
   }, 7500)
 })
 
+let loadingTimeout = null  // store timeout ID to clear it if needed
+
+// Function to skip loading on 404
+const skipLoadingOn404 = () => {
+  if (router.currentRoute.value.name === 'NotFound') {
+    if (loadingTimeout) clearTimeout(loadingTimeout)
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  // First, check if current route is 404
+  skipLoadingOn404()
+  
+  // Only start the timeout if we are NOT on 404
+  if (!isLoading.value === false) { // if isLoading is still true
+    loadingTimeout = setTimeout(() => {
+      isLoading.value = false
+    }, 7500)
+  }
+
+  window.addEventListener('resize', updateSize)
+})
+
+// Watch for route changes – if user navigates to 404 later, hide loader immediately
+watch(
+  () => router.currentRoute.value.name,
+  (newName) => {
+    if (newName === 'NotFound') {
+      if (loadingTimeout) clearTimeout(loadingTimeout)
+      isLoading.value = false
+    }
+  }
+)
 
 const updateSize = () => {
   isSmallScreen.value = window.innerWidth <= 1380
@@ -93,11 +127,11 @@ onUnmounted(() => {
         <Profile />
       </div>
       <router-view v-slot="{ Component }">
-        <transitionc class="contentloading">
+        <transition class="contentloading" >
           <div  class="Router" ref="routerContainer">
           <component class="contentloading" :is="Component" />
         </div>
-        </transitionc>
+        </transition>
         
       </router-view>
     </div>
