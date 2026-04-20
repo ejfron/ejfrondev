@@ -39,7 +39,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// ========== ONLY THE THREE COMMANDS ARE TYPED ==========
+
 const commands = [
   {
     text: "$ cd ejfrondev",
@@ -275,6 +275,12 @@ onUnmounted(() => {
 }
 
 @media (max-width: 550px) {
-  .terminal-line { font-size: 0.75rem; }
+  .terminal-line { font-size: 0.70rem; }
+
+  
+.terminal-loader {
+  width: 350px;
+}
+
 }
 </style>

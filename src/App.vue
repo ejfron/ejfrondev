@@ -111,7 +111,10 @@ onUnmounted(() => {
 
 <template>
   <div id="app">
-
+    <div class="chatmap" v-if="!isLoading">
+       <Chatbox />
+    </div>
+      
 
      <div v-if="isLoading" class="loading">
       <LoadingPage />
@@ -121,7 +124,7 @@ onUnmounted(() => {
       <div class="Catched" v-if="!isNotFound">
       <!-- Desktop layout -->
     <div class="Desktop" v-if="!isSmallScreen && !loading">
-      <Chatbox />
+  
       <div class="groupPage">
         <NavCom />
         <Profile />
@@ -138,7 +141,7 @@ onUnmounted(() => {
 
     <!-- Mobile layout -->
     <div v-else class="ResizeGroup">
-        <Chatbox />
+     
       <div class="groupPage">
         <NavCom />
         <Profile />

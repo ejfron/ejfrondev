@@ -230,12 +230,11 @@ const latestButtons = computed(() => {
   --messageUser: #f1f5f9;
 }
 
-/* Wrapper */
 .chat-wrapper {
   position: fixed;
-  bottom:-50px;
-  right: -55px;
-  z-index: 999;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
 }
 
 /* Toggle button */
@@ -477,6 +476,18 @@ const latestButtons = computed(() => {
    background: #ccc;
   
 }
+
+/* @media screen and (max-width: 1400px) {
+
+.chat-wrapper {
+  position: fixed;
+  bottom: 90%;
+  right: 1.3rem;
+  z-index: 999;
+}
+
+  
+} */
 </style>
 
 
