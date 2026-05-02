@@ -9,7 +9,6 @@ import Chatbox from './AboutProf/Chatbox.vue';
       <div class="divider"></div>
       <p>This page could not be found.</p>
     </div>
-    <Chatbox />
   </div>
 
 </template>

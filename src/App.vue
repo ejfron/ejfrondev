@@ -111,7 +111,7 @@ onUnmounted(() => {
 
 <template>
   <div id="app">
-    <div class="chatmap" v-if="!isLoading">
+    <div class="chatmap" v-if="!isLoading" >
        <Chatbox />
     </div>
       
