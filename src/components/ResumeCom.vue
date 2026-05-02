@@ -128,6 +128,13 @@
           
         <div class="PG">Express Js</div>
     </span>
+
+      <span class="skill-tag">
+        
+            <i class="devicon-nodejs-plain"></i>
+          
+        <div class="PG">Node Js</div>
+    </span>
   
       <span class="skill-tag">
         
