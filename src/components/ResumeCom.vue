@@ -57,6 +57,12 @@
           
         <div class="PG">JavaScript</div>
     </span>
+     <span class="skill-tag">
+        
+            <i class="devicon-typescript-plain"></i>
+          
+        <div class="PG">TypeScript</div>
+    </span>
       <span class="skill-tag">
         
             <i class="devicon-nuxtjs-plain"></i>

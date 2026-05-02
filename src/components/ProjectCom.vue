@@ -20,24 +20,24 @@ export default {
       
       <div class="wrapper_project">
         
-        <div class="card_proj">
-          <div class="image_section">
+         <div class="card_proj">
+            <div class="image_section">
 
-              <img src="@/assets/Screenshot 2026-01-01 121328.png" class="image_placeholder">
+              <img src="@/assets/screencapture-resume-builder-v1-0-1-three-vercel-app-personal-2026-05-02-19_00_04.png" class="image_placeholder">
 
           </div>
           <div class="content_section">
-            <div class="project_title">TicTacToe Explosion</div>
+            <div class="project_title">Resume Builder</div>
             <p class="project_description">
-              An enhanced version of tic-tac-toe with multiplayer support for up to four players. Includes chain reaction mechanics where moves impact surrounding cells.
+              A user-friendly resume builder that allows users to create professional resumes with customizable templates, real-time editing, and easy export options.
             </p>
             <div class="languageUse">
-              <span class="tech_badge">Vanilla Js</span>
-              <span class="tech_badge">Express Js</span>
+              <span class="tech_badge">JavaScript</span>
               <span class="tech_badge">Tailwind</span>
+              <span class="tech_badge">Vue.js</span>
             </div>
-            <a href="https://tictactoe-explosion.vercel.app/" target="_blank" class="website_btn">
-              <Globe :size="16" />
+            <a href="https://resume-builder-v1-0-1-three.vercel.app/personal" target="_blank" class="website_btn">
+              <Globe :size="10" />
               Website
             </a>
           </div>
@@ -66,24 +66,26 @@ export default {
           </div>
         </div>
 
-        <div class="card_proj">
-            <div class="image_section">
+       
 
-              <img src="@/assets/Screenshot 2026-01-14 220425.png" class="image_placeholder">
+                <div class="card_proj">
+          <div class="image_section">
+
+              <img src="@/assets/Screenshot 2026-01-01 121328.png" class="image_placeholder">
 
           </div>
           <div class="content_section">
-            <div class="project_title">Melbourne Hotel: Front End</div>
+            <div class="project_title">TicTacToe Explosion</div>
             <p class="project_description">
-              Developed responsive, interactive front-end designs that seamlessly integrated 3D elements for a realistic user experience and visually engaging interfaces.
+              An enhanced version of tic-tac-toe with multiplayer support for up to four players. Includes chain reaction mechanics where moves impact surrounding cells.
             </p>
             <div class="languageUse">
-              <span class="tech_badge">JavaScript</span>
+              <span class="tech_badge">Vanilla Js</span>
+              <span class="tech_badge">Express Js</span>
               <span class="tech_badge">Tailwind</span>
-              <span class="tech_badge">Vue.js</span>
             </div>
-            <a href="#" class="website_btn">
-              <Globe :size="10" />
+            <a href="https://tictactoe-explosion.vercel.app/" target="_blank" class="website_btn">
+              <Globe :size="16" />
               Website
             </a>
           </div>
@@ -101,10 +103,11 @@ export default {
             <div class="languageUse">
               <span class="tech_badge">Vue.js</span>
               <span class="tech_badge">Tailwind</span>
-              <span class="tech_badge">Nuxt Js</span>
+              <span class="tech_badge">Capacitor</span>
+              <span class="tech_badge">Express Js</span>
             
             </div>
-            <a href="#" class="website_btn">
+            <a href="#"  class="website_btn">
               <Globe :size="16" />
               Website
             </a>

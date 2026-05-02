@@ -55,10 +55,10 @@ const { visits } = useVisitor()
         target="_blank"
                         
                         >Download Cv</a>
-                        <div class="icon" id="contactIcon">
+                        <RouterLink to="/contact" class="icon" id="contactIcon">
                             <Download   color="white"
                             :size="20" />
-                        </div>
+                        </RouterLink>
                     </div>
                     <div class="foot-Contact">
                         <div class="title-contact"    @click="goToContact" >Contact Me</div>
