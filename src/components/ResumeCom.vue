@@ -76,6 +76,20 @@
       
         <div class="PG">VueJs</div>
     </span>
+     <span class="skill-tag">
+        
+            <i class="devicon-php-plain"></i>
+          
+      
+        <div class="PG">PHP</div>
+    </span>
+     <span class="skill-tag">
+        
+            <i class="devicon-laravel-plain"></i>
+          
+      
+        <div class="PG">Laravel</div>
+    </span>
     <span class="skill-tag">
         
  

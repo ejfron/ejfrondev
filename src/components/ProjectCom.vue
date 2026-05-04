@@ -32,7 +32,7 @@ export default {
               A user-friendly resume builder that allows users to create professional resumes with customizable templates, real-time editing, and easy export options.
             </p>
             <div class="languageUse">
-              <span class="tech_badge">TypesScript</span>
+              <span class="tech_badge">TypeScript</span>
               <span class="tech_badge">Tailwind</span>
               <span class="tech_badge">Nuxt.js</span>
             </div>
