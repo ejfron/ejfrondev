@@ -355,7 +355,7 @@ a email now, lets build  your desired application.</div>
   font-size: 0.70rem;
  }
 .email{
-  background-color: #0d800d39;
+  background: var(--card-bg);
   width: 100%;
   height: 4rem;
   margin-top: 1rem;
@@ -394,6 +394,7 @@ a email now, lets build  your desired application.</div>
 /* Middle Bars */
 .middle_bar {
   height: auto;
+  width: 100%;
 }
 
 .head_middle_bar{
@@ -404,12 +405,18 @@ a email now, lets build  your desired application.</div>
 .section_middle_bar{
   display: flex;
   gap: 1rem;
+  width: 100%;
+}
+
+.section_right_middle_bar, .section_left_middle_bar{
+  width: 100%;
 }
 
 .sec_map{
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
 }
 
 .sec_icon{
@@ -420,16 +427,17 @@ a email now, lets build  your desired application.</div>
 }
 .sec_info{
   
-  background-color: #0d800d39;
-width: 200px;
+  background: var(--card-bg);
+width: 100%;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 10px;
-  
-  span{
+
+}
+
+.sec_info  span{
     font-size: 0.70rem;
     font-weight: 500;
     color: var(--text-color-par);
-  }
 }
 
 
@@ -465,7 +473,7 @@ width: 200px;
 }
 
 .emailText {
-background-color: #0d800d39;
+  background: var(--card-bg);
   width: 100%;
   height: 150px;
   border-radius: 8px;
@@ -482,7 +490,7 @@ background-color: #0d800d39;
 }
 
 .button_placeholder {
-  background-color: #76c741;
+  background-color: #10c010;
   width: 100%;
   height: auto;
   border-radius: 8px;

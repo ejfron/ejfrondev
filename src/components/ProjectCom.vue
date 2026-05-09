@@ -1,284 +1,349 @@
 <script>
-import { Eye, Globe } from 'lucide-vue-next';
 
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import modalInprogress from './AboutProf/modalInprogress.vue';
 export default {
   name: "Works",
+  data() {
+    return {
+      activeTab: "All",
+       showInProgressModal: false,
+       selectedProject: null,
+      projects: [
+        {
+          title: "Resume Builder",
+          desc: "ATS-friendly resume builder with customizable templates.",
+          category: "Personal",
+          status: "completed",
+          tech: ["Nuxt.js", "Tailwind", "TypeScript"],
+          link: "https://resume-builder-v1-0-1-three.vercel.app/"
+        },
+        // {
+        //   title: "Capstone Generator",
+        //   desc: "Generate IT/CS capstone ideas using AI.",
+        //   category: "Academic",
+        //   status: "completed",
+        //   tech: ["Nuxt.js", "OpenAI", "Tailwind"],
+        //   link: "#"
+        // },
+        {
+          title: "Food App Scanner",
+          desc: "Scan food items and get nutritional information.",
+          category: "Freelance",
+          status: "completed",
+          tech: ["Vue.js", "Regex", "Tailwind", "Capacitor"],
+          link: "#",
+           DesStatushead: "Private App project",
+           DesStatus: "not available to view"
+        },
+        {
+          title: "CraftLearn",
+          desc: "Custom e-learning platform for craft skills.",
+          category: "Freelance",
+          status: "completed",
+          tech: ["Vue.js", "Vue Router", "Tailwind"],
+          link: "https://demosite-craftlearn-urs.vercel.app/"
+        },
+        {
+          title: "TicTacToe Explosion",
+          desc: "Multiplayer chain-reaction tic-tac-toe.",
+          category: "Academic",
+          status: "completed",
+          tech: ["Vanilla JS", "Express", "Tailwind"],
+          link: "https://tictactoe-explosions.vercel.app/",
+          
+
+        },
+         {
+          title: "Ticketing Management System",
+          desc: "Manage and track support tickets efficiently.",
+          category: "Academic",
+          status: "completed",
+          tech: ["Nuxt.js", "Express", "Tailwind", "postgreSQL"],
+          link: "#",
+           DesStatushead: "Not available",
+           DesStatus: "not available to view"
+        },
+        {
+          title: "Water Management System",
+          desc: "Manage and track water usage and quality.",
+          category: "Freelance",
+          status: "in-progress",
+          tech: ["Nuxt.js", "Express", "Tailwind", "postgreSQL", "Capacitor"],
+          link: "",
+          DesStatushead: "In progress",
+          DesStatus: "in progress"
+        }
+      ]
+    };
+  },
   components: {
-    Eye,
-    Globe
+    modalInprogress
+  },
+
+  methods: {
+handleStatusClick(project) {
+  const invalidLink = !project.link || project.link === "#";
+
+  if (project.status === "in-progress" || invalidLink) {
+    this.selectedProject = project; // ✅ STORE PROJECT
+    this.showInProgressModal = true;
+    return;
   }
+
+  window.open(project.link, "_blank");
 }
-
-
+  },
+  computed: {
+    filteredProjects() {
+      if (this.activeTab === "All") return this.projects;
+      return this.projects.filter(p => p.category === this.activeTab);
+    }
+  }
+};
 </script>
 
 <template>
-  <div class="ProjectMain" id="works">
-    <div class="map_proj">
-      <div class="head_project"><span>M</span>y <span>P</span>rojects</div>
-      <div class="line"></div>
-      
-      <div class="wrapper_project">
-        
-         <div class="card_proj">
-            <div class="image_section">
+  <div class="works">
 
-              <img src="@/assets/screencapture-resume-builder-v1-0-1-three-vercel-app-personal-2026-05-02-19_00_04.png" class="image_placeholder">
+    <!-- ✅ CONTAINER (THIS FIXES WIDTH) -->
+    <div class="works-container">
 
-          </div>
-          <div class="content_section">
-            <div class="project_title">Resume Builder</div>
-            <p class="project_description">
-              A user-friendly resume builder that allows users to create professional resumes with customizable templates, real-time editing, and easy export options.
-            </p>
-            <div class="languageUse">
-              <span class="tech_badge">TypeScript</span>
-              <span class="tech_badge">Tailwind</span>
-              <span class="tech_badge">Nuxt.js</span>
-            </div>
-            <a href="https://resume-builder-v1-0-1-three.vercel.app/personal" target="_blank" class="website_btn">
-              <Globe :size="10" />
-              Website
-            </a>
-          </div>
+      <!-- HEADER -->
+      <div class="header">
+        <h1><span>A</span>ll Projects</h1>
+
+        <div class="tabs">
+          <button 
+            v-for="tab in ['All','Academic','Freelance','Personal']"
+            :key="tab"
+            :class="{active: activeTab === tab}"
+            @click="activeTab = tab"
+          >
+            {{ tab }}
+          </button>
         </div>
-
-        <div class="card_proj">
-            <div class="image_section">
-
-              <img src="../assets/ea4f86d9-d254-41b0-87dc-6d10b9b060a4.webp" class="image_placeholder">
-
-          </div>
-          <div class="content_section">
-            <div class="project_title">CraftLearn App</div>
-            <p class="project_description">
-              A modern learning platform dedicated to handicraft education. Designed to help users explore, learn, and practice traditional and creative crafts.
-            </p>
-            <div class="languageUse">
-              <span class="tech_badge">Vue.js</span>
-              <span class="tech_badge">Shadcn</span>
-              <span class="tech_badge">Tailwind</span>
-            </div>
-            <a href="https://demosite-craftlearn-urs.vercel.app/" target="_blank" class="website_btn">
-              <Globe :size="16" />
-              Website
-            </a>
-          </div>
-        </div>
-
-       
-
-                <div class="card_proj">
-          <div class="image_section">
-
-              <img src="@/assets/Screenshot 2026-01-01 121328.png" class="image_placeholder">
-
-          </div>
-          <div class="content_section">
-            <div class="project_title">TicTacToe Explosion</div>
-            <p class="project_description">
-              An enhanced version of tic-tac-toe with multiplayer support for up to four players. Includes chain reaction mechanics where moves impact surrounding cells.
-            </p>
-            <div class="languageUse">
-              <span class="tech_badge">Vanilla Js</span>
-              <span class="tech_badge">Express Js</span>
-              <span class="tech_badge">Tailwind</span>
-            </div>
-            <a href="https://tictactoe-explosion.vercel.app/" target="_blank" class="website_btn">
-              <Globe :size="16" />
-              Website
-            </a>
-          </div>
-        </div>
-
-         <div class="card_proj">
-            <div class="image_section">
-
-              <img src="../assets/screencapture-readdy-link-preview-f7c84284-ea1e-4b30-abdd-acb1f00cfe0f-5510394-2026-01-14-22_54_00.webp" class="image_placeholder">
-
-          </div>
-          <div class="content_section">
-            <div class="project_title">Food App Scanner</div>
-           <p class="project_description"> Mobile app that scans food labels, using DepEd traffic-light guidelines to instantly categorize sodium, sugar, and saturated fat content for nutritional assessment. </p>
-            <div class="languageUse">
-              <span class="tech_badge">Vue.js</span>
-              <span class="tech_badge">Tailwind</span>
-              <span class="tech_badge">Capacitor</span>
-              <span class="tech_badge">Express Js</span>
-            
-            </div>
-            <a href="#"  class="website_btn">
-              <Globe :size="16" />
-              Website
-            </a>
-          </div>
-        </div>
-
       </div>
+
+      <!-- GRID -->
+      <div class="grid">
+        <div 
+          v-for="(project, index) in filteredProjects" 
+          :key="index"
+          class="card"
+        >
+          <!-- LEFT -->
+          <div class="card-left">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.desc }}</p>
+
+            <div class="tech">
+              <span v-for="(t,i) in project.tech" :key="i">{{ t }}</span>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="card-right">
+            <span 
+              class="status"
+              :class="project.status"
+             
+            >
+              {{ project.status }}
+            </span>
+            <div   >
+              <a
+                  :class="{ disabled: project.status === 'in-progress' || !project.link || project.link === '#' }"
+               @click.prevent="handleStatusClick(project)"
+                  href="#"
+                  class="visit"
+                >
+                  Visit →
+                </a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <teleport to="body" >
+
+        <modalInprogress  :project="selectedProject"   v-if="showInProgressModal" 
+  @close="showInProgressModal = false"/>
+      </teleport>
+
     </div>
   </div>
 </template>
 
 <style scoped>
-  .ProjectMain{
-    padding: 1rem 1rem;
-    
-  }
 
-/* Custom Scrollbar */
-#ProjectMain::-webkit-scrollbar { width: 6px; }
-#ProjectMain::-webkit-scrollbar-thumb { background: #10c010; border-radius: 10px; }
-
-.head_project {
-  font-size: 1rem;
-  font-weight: 700;
-   color: var(--text-color-head);
-  margin-bottom: 0.5rem;
-}
-.head_project span { 
-  color: #10c010;
-   font-weight: 700;
- }
-
-.line {
-     background-color: var(--line-span);
+/* 🔥 OUTER (full background) */
+.works {
   width: 100%;
-  height: 1px;
+  background: var(--bg-color);
+  overflow: hidden;
+  min-height: 100vh;
+  margin: auto;
+}
+
+/* ✅ THIS MATCHES YOUR RESUME WIDTH */
+.works-container {
+  padding: 1.5rem;
+  color: #e5e7eb;
+  width: 100vw;
+}
+
+/* HEADER */
+.header h1 {
+ font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-color-head);
+    padding-bottom: 1.4rem;
+}
+
+.header h1 span {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 10px;
   margin-bottom: 2rem;
 }
 
-.wrapper_project {
-  display: flex;
-  flex-wrap: wrap;
-  
-  gap: 1rem;
-}
-
-.card_proj {
-    background-color: var(--card-bg);
-
-  width: 280px;
-  height: auto;
-  overflow: hidden;
-  box-shadow: 5px 4px 20px #33bc2e5a;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-}
-
-.card_proj:hover {
-  transform: translateY(-5px);
-}
-
-.image_section {
-  width: 100%;
-  height: 150px;
-    display: flex;
-  align-items: center;
-  justify-content: center;
-    overflow: hidden;
-}
-
-.image_placeholder {
-  height: 100%;
-  width: 100%;
-
-
-}
-.blue_tint { background: #2d3436; }
-.dark_tint { background: #636e72; }
-
-.placeholder_text {
-color: var(--text-color-par);
-  font-weight: bold;
-  opacity: 0.8;
-}
-
-
-.content_section {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.project_title {
-  font-size: 0.8rem;
-  font-weight: 700;
-color: var(--text-color-head);;
-}
-
-.project_description {
-  font-size: 0.8rem;
-color: var(--text-color-par);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.languageUse {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tech_badge {
-  background: #10c010b4;
-     color: var(--text-color-par);
+.tabs button {
+  background: transparent;
+  border: 1px solid #1f2937;
+  color: var(--text-color-pa);
+  padding: 5px 12px;
   border-radius: 6px;
-  font-size: 0.70rem;
-  font-weight: 600;
-
-  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.website_btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #10c010b4;
-  color: white;
-  width: fit-content;
-  padding: 8px 18px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-size: 0.70rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-  transition: opacity 0.2s;
+.tabs button.active {
+  border-color: #22c55e;
+  color: #22c55e;
 }
 
-.website_btn:hover {
-  opacity: 0.8;
-}
-
-@media (max-width: 1380px){
-  .wrapper_project {
-  align-items: center;
-  justify-content: center;
-}
-
-.card_proj {
-  width: 350px;
-  height: 25rem;
-
-
-}
-}
-
-@media (max-width: 1000px){
-.card_proj {
-  width: 280px;
-}
-
-}
-
-@media (max-width: 900px){
-  .card_proj {
+/* GRID */
+.grid {
+  display: grid;
+  gap: 1rem;
   width: 100%;
 }
+
+/* CARD */
+.card {
+  display: flex;
+  justify-content: space-between;
+  background: var(--card-bg);
+
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 600px;
+  transition: 0.25s;
 }
 
-@media (max-width: 600px) {
-  .wrapper_project { grid-template-columns: 1fr; }
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #22c55e;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
 }
+
+/* LEFT */
+.card-left h3 {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+  color: var(--text-color-pa);
+  font-weight: 500;
+}
+
+.card-left p {
+  font-size: 0.7rem;
+  color: var(--text-color-pa);
+  margin-bottom: 0.6rem;
+}
+
+/* TECH */
+.tech {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.tech span {
+  background: var(--Languegae) ;
+  padding: 3px 6px;
+  font-size: 0.65rem;
+  border-radius: 5px;
+  color: var(--colortech);
+}
+
+/* RIGHT */
+.card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* STATUS */
+.status {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.status.completed {
+  background: #22c55e33;
+  color: #22c55e;
+}
+
+.status.in-progress {
+  background: rgba(239,68,68,0.2);
+  color: #ef4444;
+}
+
+/* BUTTON */
+.visit {
+  font-size: 0.7rem;
+  color: #22c55e;
+  text-decoration: none;
+}
+
+
+
+@media screen and (max-width: 1300px) {
+  .works-container{
+    width: 100%;
+  }
+
+  .card {
+
+  width: 100%;
+ max-width: 100%;
+}
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card-right {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 </style>

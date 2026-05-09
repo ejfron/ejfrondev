@@ -267,7 +267,7 @@ export default {
 
     padding: 0.8rem;
     /* border-radius: 8px; */
-    background-color: var(--card-bg);
+    background: var(--card-bg);
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     transition: background-color 0.3s ease;
     width: 100%;

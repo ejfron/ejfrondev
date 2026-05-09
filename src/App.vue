@@ -1,107 +1,102 @@
-
 <script setup>
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
+
 import Profile from '@/components/AboutProf/Prof.vue'
 import NavCom from '@/components/AboutProf/nav.vue'
 import Resize from '@/components/MainContentResize.vue'
 import NotFound from '@/components/404.vue'
 import LoadingPage from '@/components/AboutProf/loading.vue'
-
 import Chatbox from './components/AboutProf/Chatbox.vue'
-// import ModalControler from '@/components/AboutProf/modalController.vue'
 
-
-const isSmallScreen = ref(window.innerWidth <= 1380) 
-const routerContainer = ref(null)
-const mobileRouterContainer = ref(null)
 const router = useRouter()
 
-const isLoading = ref(true)
+/* =========================
+   STATE
+========================= */
+const isSmallScreen = ref(window.innerWidth <= 1380)
+const isLoading = ref(false)
 
+const routerContainer = ref(null)
+const mobileRouterContainer = ref(null)
+
+/* =========================
+   FIRST VISIT LOADING ONLY
+========================= */
 onMounted(() => {
-  setTimeout(() => {
-    isLoading.value = false
-  }, 7500)
-})
+  const hasVisited = sessionStorage.getItem('hasVisited')
 
-let loadingTimeout = null  // store timeout ID to clear it if needed
+  if (!hasVisited) {
+    isLoading.value = true
 
-// Function to skip loading on 404
-const skipLoadingOn404 = () => {
-  if (router.currentRoute.value.name === 'NotFound') {
-    if (loadingTimeout) clearTimeout(loadingTimeout)
-    isLoading.value = false
-  }
-}
-
-onMounted(() => {
-  // First, check if current route is 404
-  skipLoadingOn404()
-  
-  // Only start the timeout if we are NOT on 404
-  if (!isLoading.value === false) { // if isLoading is still true
-    loadingTimeout = setTimeout(() => {
+    setTimeout(() => {
       isLoading.value = false
+      sessionStorage.setItem('hasVisited', 'true')
     }, 7500)
+  }else{
+    isLoading.value = false
   }
-
-  window.addEventListener('resize', updateSize)
 })
 
-// Watch for route changes – if user navigates to 404 later, hide loader immediately
-watch(
-  () => router.currentRoute.value.name,
-  (newName) => {
-    if (newName === 'NotFound') {
-      if (loadingTimeout) clearTimeout(loadingTimeout)
-      isLoading.value = false
-    }
-  }
-)
-
-const updateSize = () => {
-  isSmallScreen.value = window.innerWidth <= 1380
-}
-
-import { computed } from 'vue'
-
+/* =========================
+   404 CHECK
+========================= */
 const isNotFound = computed(() => {
   return router.currentRoute.value.name === 'NotFound'
 })
 
+/* =========================
+   RESIZE HANDLER
+========================= */
+const updateSize = () => {
+  isSmallScreen.value = window.innerWidth <= 1380
+}
 
+/* =========================
+   SCROLL RESET (DESKTOP)
+========================= */
 const scrollIfDesktop = () => {
-
   if (!isSmallScreen.value) {
-
     if (routerContainer.value) {
       routerContainer.value.scrollTop = 0
     }
-    
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     })
   }
- 
 }
 
-
+/* =========================
+   WATCH ROUTE CHANGE
+========================= */
 watch(
   () => router.currentRoute.value.path,
   () => {
-   
     nextTick(() => {
       scrollIfDesktop()
     })
   }
 )
 
+/* =========================
+   WATCH 404 CHANGE
+========================= */
+watch(
+  () => router.currentRoute.value.name,
+  (name) => {
+    if (name === 'NotFound') {
+      isLoading.value = false
+    }
+  }
+)
+
+/* =========================
+   LIFECYCLE
+========================= */
 onMounted(() => {
   window.addEventListener('resize', updateSize)
-
 })
 
 onUnmounted(() => {
@@ -126,7 +121,10 @@ onUnmounted(() => {
     <div class="Desktop" v-if="!isSmallScreen && !loading">
   
       <div class="groupPage">
-        <NavCom />
+        
+          <NavCom />
+       
+        
         <Profile />
       </div>
       <router-view v-slot="{ Component }">
@@ -254,6 +252,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
       width: 100%;
     } */
 
+    .Desktop{
+  display: flex ;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
     .groupPage{
       margin-bottom: 1rem;
@@ -270,6 +274,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
          .groupPage{
       margin-left: 0rem;
     }
+
+   
     }
 
    @media screen and (max-width:780px){
@@ -326,17 +332,21 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   --hover-prof: #0000005a;
   --line-span: #0000004c;
   --messageUser: #ffff;
-  --bubbles: rgba(255, 255, 255, 0.374);
+  --Languegae: #22c55e33;
+  --bubbles: #ffffff5f;
+  --colortech: #22c55e;
          --profile: linear-gradient(to bottom,#ffffff 0%,#78cc6d 100%);
 }
 
 /* 2. Define Dark Mode Overrides */
 .dark-mode {
    --messageUser: #ffff;
-  --bg-color: #272626;  
-   --bg-color-body: linear-gradient(to bottom right,#111 0%,#111 100%);      /* Dark background */
-  --card-bg: #40404725;       /* Darker nav blocks */
+  --bg-color: #0b111e;  
+   --bg-color-body: linear-gradient(145deg, #020617, #080d18);      /* Dark background */
+  --card-bg: linear-gradient(145deg, #0f172a, #020617);   
   --text-color: #ffffff;
+  --colortech: #22c55e;
+    --Languegae: #111827;
   --text-color-pa: #ffffffc6;
   --text-color-par: #ffffffad;
   --text-color-head: #ffff;

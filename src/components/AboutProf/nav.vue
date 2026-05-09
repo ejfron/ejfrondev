@@ -1,6 +1,6 @@
 <script>
 import { User, List, Eye, Send, Moon, Menu, Download, Sun } from 'lucide-vue-next'
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 export default {
@@ -8,11 +8,16 @@ export default {
   components: {
     User, List, Eye, Send, Moon, Menu, Download, Sun
   },
+
   setup() {
     const isDark = ref(false)
-    const isSmallScreen = ref(window.innerWidth <= 1380) // Fixed: changed to 780
+
+    const isSmallScreen = ref(window.innerWidth <= 1380)
+    const useTeleport = ref(window.innerWidth <= 1380) // ✅ FIXED (true when <= 1380)
+    const iconColor = computed(() => (isDark.value ? 'white' : 'black'))
     const isBottomNavOpen = ref(false)
     const activeNav = ref('about')
+
     const router = useRouter()
     const route = useRoute()
 
@@ -21,23 +26,18 @@ export default {
     }
 
     const handleNavClick = (navItem = null) => {
-      if (navItem) {
-        activeNav.value = navItem
-      }
-      
+      if (navItem) activeNav.value = navItem
+
       if (isSmallScreen.value) {
         isBottomNavOpen.value = false
-        setTimeout(() => {
-          scrollToSection()
-        }, 100)
+        setTimeout(() => scrollToSection(), 100)
       }
     }
 
-    // Fixed: route mapping
     const setActiveNavFromRoute = () => {
       const routeMap = {
-        '/': 'about', 
-        '/resume': 'resume', 
+        '/': 'about',
+        '/resume': 'resume',
         '/works': 'works',
         '/contact': 'contact'
       }
@@ -46,30 +46,25 @@ export default {
 
     const scrollToSection = () => {
       const currentPath = router.currentRoute.value.path
-      
+
       const scrollTargets = {
-        '/': '#home', 
-        '/resume': '#resume', 
-        '/works': '#works', 
-        '/contact': '#contact' 
+        '/': '#home',
+        '/resume': '#resume',
+        '/works': '#works',
+        '/contact': '#contact'
       }
 
       const targetSelector = scrollTargets[currentPath]
-      
+
       if (targetSelector) {
         setTimeout(() => {
-          const element = document.querySelector(targetSelector)
-          if (element) {
-            element.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start' 
-            })
+          const el = document.querySelector(targetSelector)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
           } else {
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }, 150)
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
 
@@ -89,53 +84,66 @@ export default {
     }
 
     const updateSize = () => {
-      isSmallScreen.value = window.innerWidth <= 780
+      const w = window.innerWidth
+
+      isSmallScreen.value = w <= 1380
+      useTeleport.value = w <= 1380
+
       if (!isSmallScreen.value) {
         isBottomNavOpen.value = false
       }
     }
 
+    const handleClickOutside = (event) => {
+      const nav = document.querySelector('.bottom-navi')
+      const menuButton = document.querySelector('.humber')
+
+      if (
+        nav &&
+        menuButton &&
+        !nav.contains(event.target) &&
+        !menuButton.contains(event.target) &&
+        isBottomNavOpen.value
+      ) {
+        isBottomNavOpen.value = false
+      }
+    }
+
+    const handleLogoClick = () => {
+      if (isSmallScreen.value) {
+        isBottomNavOpen.value = false
+        router.push('/profCard')
+
+        setTimeout(() => {
+          const el = document.querySelector('#profCard')
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 200)
+      }
+    }
+
     onMounted(() => {
       const savedTheme = localStorage.getItem('theme')
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        isDark.value = true
-        updateTheme()
-      }
 
       window.addEventListener('resize', updateSize)
       document.addEventListener('click', handleClickOutside)
-      
+
       setActiveNavFromRoute()
 
-      watch(() => route.path, () => {
-        setActiveNavFromRoute()
-      })
+      if (!savedTheme) {
+        isDark.value = true
+      } else {
+        isDark.value = savedTheme === 'dark'
+      }
+      updateTheme()
+
+      watch(() => route.path, setActiveNavFromRoute)
 
       router.afterEach((to) => {
         if (isSmallScreen.value) {
           setTimeout(() => {
             if (to.hash) {
-              const element = document.querySelector(to.hash)
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' })
-              }
-            } else {
-              const scrollTargets = {
-                '/': '#home',
-                '/resume': '#resume',
-                '/works': '#works',
-                '/contact': '#contact'
-              }
-              
-              const targetSelector = scrollTargets[to.path]
-              if (targetSelector) {
-                const element = document.querySelector(targetSelector)
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' })
-                }
-              }
+              const el = document.querySelector(to.hash)
+              if (el) el.scrollIntoView({ behavior: 'smooth' })
             }
           }, 200)
         }
@@ -147,34 +155,6 @@ export default {
       document.removeEventListener('click', handleClickOutside)
     })
 
-    const handleClickOutside = (event) => {
-      const nav = document.querySelector('.bottom-navi')
-      const menuButton = document.querySelector('.humber')
-      
-      if (nav && 
-          menuButton && 
-          !nav.contains(event.target) && 
-          !menuButton.contains(event.target) &&
-          isBottomNavOpen.value) {
-        isBottomNavOpen.value = false
-      }
-    }
-
-    const handleLogoClick = () => {
-      if (isSmallScreen.value) {
-        isBottomNavOpen.value = false
-        
-        router.push('/profCard')
-        
-        setTimeout(() => {
-          const element = document.querySelector('#profCard')
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 200)
-      }
-    }
-
     return {
       isDark,
       toggleDarkMode,
@@ -183,7 +163,9 @@ export default {
       toggleBottomNav,
       handleNavClick,
       handleLogoClick,
-      activeNav 
+      activeNav,
+      useTeleport, 
+      iconColor
     }
   }
 }
@@ -191,298 +173,422 @@ export default {
 
 <template>
   <div class="navigation">
-    <div class="map-Navi">
-      <div class="top-navi">
-        <div class="topleft_navi" v-if="isSmallScreen">
-          <a href="javascript:void(0)" class="logo" @click="handleLogoClick">
+
+    <!-- 🔥 TELEPORT WHOLE SIDEBAR -->
+    <Teleport to="body" v-if="useTeleport">
+
+      <div class="map-Navi">
+
+        <!-- TOP NAV -->
+        <div class="top-navi">
+
+          <div class="logo" v-if="isSmallScreen">
             EjFron
-          </a>
+          </div>
+
+          <div class="topRight_navi">
+            <div class="humber" @click="toggleBottomNav">
+              <Menu :size="20" :color="isDark ? 'white' : 'black'" />
+            </div>
+
+            <div class="DarkmodeToglle" @click="toggleDarkMode">
+              <Sun v-if="isDark" :size="20" color="white" />
+              <Moon v-else :size="20" color="black" />
+            </div>
+          </div>
         </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-navi" :class="{ active: isBottomNavOpen }">
+
+          <router-link to="/" @click="handleNavClick('about')" :class="{ ActiveNav: activeNav==='about' }">
+            <div class="user"><User :color="iconColor"/><div class="BottomIconName">About</div></div>
+          </router-link>
+
+          <router-link to="/resume" @click="handleNavClick('resume')" :class="{ ActiveNav: activeNav==='resume' }">
+            <div class="list"><List :color="iconColor"  /><div class="BottomIconName">Resume</div></div>
+          </router-link>
+
+          <router-link to="/works" @click="handleNavClick('works')" :class="{ ActiveNav: activeNav==='works' }">
+            <div class="eye"><Eye :color="iconColor"/><div class="BottomIconName">Projects</div></div>
+          </router-link>
+
+          <router-link to="/contact" @click="handleNavClick('contact')" :class="{ ActiveNav: activeNav==='contact' }">
+            <div class="airplane"><Send :color="iconColor"/><div class="BottomIconName">Contact</div></div>
+          </router-link>
+
+        </div>
+
+      </div>
+
+    </Teleport>
+
+    <!-- 🔥 FALLBACK (NO TELEPORT) -->
+    <div v-else class="map-Navi">
+
+      <div class="top-navi">
+        <div class="logo" v-if="isSmallScreen">EjFron</div>
 
         <div class="topRight_navi">
           <div class="humber" @click="toggleBottomNav">
-            <Menu :color="isDark ? 'white' : 'black'" :size="20" />
+            <Menu :size="20" />
           </div>
-        
+
           <div class="DarkmodeToglle" @click="toggleDarkMode">
-            <Sun v-if="isDark" color="white" :size="20" />
-            <Moon v-else color="black" :size="20" />
+            <Sun v-if="isDark" />
+            <Moon v-else />
           </div>
         </div>
       </div>
 
-     <div id="bottom-navi" class="bottom-navi" :class="{ active: isBottomNavOpen }">
-    <router-link 
-      to="/" 
-      @click="handleNavClick('about')"
-      class="nav-link"
-      :class="{ 'ActiveNav': activeNav === 'about' }"
-    >
-      <div class="user">
-        <User :color="isDark ? 'white' : 'black'" :size="isSmallScreen ? 18 : 20" />
-        <div class="BottomIconName">About</div>
-      </div>
-    </router-link>
+      <div class="bottom-navi" :class="{ active: isBottomNavOpen }">
 
-    <router-link 
-      to="/resume" 
-      @click="handleNavClick('resume')"
-      class="nav-link"
-      :class="{ 'ActiveNav': activeNav === 'resume' }"
-    >
-      <div class="list">
-        <List :color="isDark ? 'white' : 'black'" :size="isSmallScreen ? 18 : 20"/>
-        <div class="BottomIconName">Resume</div>
-      </div>
-    </router-link>
+        <router-link to="/" @click="handleNavClick('about')" class="text">
+          <div class="user"><User class="Icon" :color="iconColor"/><div>About</div></div>
+        </router-link>
 
-    <router-link 
-      to="/works" 
-      @click="handleNavClick('works')"
-      class="nav-link"
-      :class="{ 'ActiveNav': activeNav === 'works' }"
-    >
-      <div class="eye">
-        <Eye :color="isDark ? 'white' : 'black'" :size="isSmallScreen ? 18 : 20" />
-        <div class="BottomIconName">Projects</div>
-      </div>
-    </router-link>
+        <router-link to="/resume" @click="handleNavClick('resume')" class="text">
+          <div class="list"><List class="Icon" :color="iconColor" /><div>Resume</div></div>
+        </router-link>
 
-    <router-link 
-      to="/contact" 
-      @click="handleNavClick('contact')"
-      class="nav-link"
-      :class="{ 'ActiveNav': activeNav === 'contact' }"
-    >
-      <div class="airplane">
-        <Send :color="isDark ? 'white' : 'black'" :size="isSmallScreen ? 18 : 20" :strokeWidth="isSmallScreen ? 2 : 1" />
-        <div class="BottomIconName">Contact</div>
-      </div>
-    </router-link>
-  </div>
+        <router-link to="/works" @click="handleNavClick('works')" class="text">
+          <div class="eye"><Eye class="Icon" :color="iconColor" /><div>Projects</div></div>
+        </router-link>
 
+        <router-link to="/contact" @click="handleNavClick('contact')" class="text">
+          <div class="airplane"><Send class="Icon" :color="iconColor"/><div>Contact</div></div>
+        </router-link>
+
+      </div>
 
     </div>
+
   </div>
 </template>
 
 
+
 <style scoped>
 
-
-
-/* Ensure your existing styles use the CSS variables you defined in App.vue */
-.top-navi, .bottom-navi {
-background-color: var(--bg-color);/* Changed from #fff */
-}
-
-.bottom-navi.active {
-  top: 0;
-  opacity: 1;
-  display: flex;
-}
-.logo{
-
-    text-decoration: none;
-      font-size: 1.2rem;
-  color: var(--text-color);
-    font-weight: 800;
-
-
-
-}
-
-.bottom-navi a {
-  cursor: pointer;
-  text-decoration: none;
-} 
-
-.ActiveNav{
-  background-color: #51fc9068;
-  width: 100%;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-  
-.BottomIconName {
-  color: var(--text-color); /* Changed from #000 */
-}
-
-.user, .list, .eye {
-  border-bottom: 1px solid var(--border-color); /* Changed from #0000004b */
-  padding: 0.5rem 0rem;
-}
-
-.topRight_navi{
-  gap: 1rem;
+/* =========================
+   GLOBAL NAV WRAPPER
+========================= */
+.navigation {
+  height: 100%;
+  margin-right: 10px;
   display: flex;
   align-items: center;
-  flex-direction: column;
-}
-
-/* ... keep the rest of your existing CSS exactly as it is ... */
-.navigation { 
-    height: 100%; 
-  margin-right: 10px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  justify-content: center;
   z-index: 2;
 }
 
-#no-underline { 
-  text-decoration: none; 
-  width: 100%; 
+.text{
+  text-decoration: none;
+  color: var(--text-color);
 }
 
-.map-Navi { border-radius: 10px; 
-  width: 5rem; display: flex; 
-  flex-direction: column; 
-
-  padding: 3rem 0rem; 
-}
-
-.top-navi { 
-  border-radius: 5px; 
-  padding: 2rem 1rem; 
-  width: 100%; 
-   display: flex; 
-   align-items: center; 
-   justify-content: center; 
-   flex-direction: column; 
-   gap: 1rem; 
-  }
-
-.user, .list, .eye { display: flex; align-items: center; flex-direction: column; cursor: pointer; justify-content: center; width: 100%; }
-.humber, .DarkmodeToglle { display: flex; align-items: center; flex-direction: column; cursor: pointer; justify-content: center; width: 100%; }
-.airplane { display: flex; align-items: center; flex-direction: column; cursor: pointer; justify-content: center; width: 100%;
-padding: 0.5rem 0rem; }
-.BottomIconName { font-size: 12px; text-transform: uppercase; }
-.bottom-navi { 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: column; 
-  gap: 1.5rem; 
-
-  margin-top: 0.5rem; 
-  border-radius: 5px; 
-}
-
-.bottom-navi.hidden {
-  top: -10rem;
-  opacity: 0;
-}
-
-
-  @media screen  and (max-width:1380px){
-
-  .ActiveNav{
+/* =========================
+   SIDEBAR CONTAINER
+========================= */
+.map-Navi {
   width: 5rem;
-
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 0rem;
+  transition: all 0.3s ease;
 }
 
-  
-
-    .navigation {
-      margin-left: 5rem;
-    }
-
-
-    .map-Navi{
-      height: 100%;
-        position: fixed;
-          top: 0;
-    }
-
-    .logo{
-      display: none;
-    }
-
-  }
-
-
-    @media screen  and (max-width:1340px){
-         .map-Navi{
-      height: 100%;
-        position: fixed;
-       margin-left: -10rem;
-    }
-    }
-  @media screen  and (max-width:780px){
-        .logo{
-      display: flex;
-    }
-
-    .ActiveNav{
-
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-}
-
-
-
-   .bottom-navi{
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    width: 100%;
-    border-radius: 0px;
-    height: 4rem;
-     margin-top: 0rem;
-     border-top: 2px solid #fff;
-     z-index: 5;
-     top: 0;
-     position: relative;
-     opacity: 0;
-
-     display: none;
-   }
-
-   .top-navi { 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0px;
-
-  width: 100%; 
-  height: 5rem;
-   flex-direction: row; 
-   padding: 1rem 2rem;
-   z-index: 5;
-
-  }
-  .map-Navi {
-  width: 100%; 
-  height: 0;
-  padding: 0rem 0rem; 
-  top: 0;
-  left: 0;
-  position: fixed;
-  margin-left: 0rem;
-}
-
-.topRight_navi{
+/* =========================
+   TOP NAV
+========================= */
+.top-navi {
+  width: 100%;
+  border-radius: 5px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
-  flex-direction: row;
-   transform: scaleX(-1);
-   
+  background-color: var(--bg-color);
 }
+
+/* logo */
+.logo {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+
+/* =========================
+   NAV ITEMS
+========================= */
+.user,
+.list,
+.eye,
+.airplane {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.user,
+.list,
+.eye {
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* icon label */
+.BottomIconName {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* =========================
+   TOP RIGHT ACTIONS
+========================= */
+.topRight_navi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* clickable icons */
+.humber,
+.DarkmodeToglle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* =========================
+   BOTTOM NAV (BASE)
+========================= */
+.bottom-navi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* active open state */
+.bottom-navi.active {
+  top: 0;
+  opacity: 1;
+}
+
+/* links */
+.bottom-navi a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* =========================
+   ACTIVE NAV STATE
+========================= */
+.ActiveNav {
+  background-color: #0d800d;
+  width: 100%;
+  animation: highlight 0.25s ease-in-out;
+}
+
+@keyframes highlight {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: #0d800d;
+  }
+}
+
+/* =========================
+   SMALL FIXES
+========================= */
+#no-underline {
+  text-decoration: none;
+  width: 100%;
+}
+
+/* =========================
+   DESKTOP / SIDEBAR MODE (<=1380px)
+========================= */
+@media screen and (max-width: 1380px) {
+
+  .navigation {
+    margin-left: 5rem;
   }
 
-  @media screen and (max-width: 780px) {
+  .map-Navi {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 9999;
+    margin-left: 11rem;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .ActiveNav {
+    width: 5rem;
+  }
+
+  .top-navi,
+  .bottom-navi {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 1320px){
+  .map-Navi {
+    margin-left: 10rem;
+  }
+}
+
+@media screen and (max-width: 1285px){
+  .map-Navi {
+    margin-left: 9rem;
+  }
+}
+/* =========================
+   MID BREAKPOINT
+========================= */
+@media screen and (max-width: 1240px) {
+  .map-Navi {
+    height: 100%;
+    margin-left: 8rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .map-Navi {
+
+    margin-left: 7rem;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .map-Navi {
+
+    margin-left: 6rem;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .map-Navi {
+
+    margin-left: 5rem;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .map-Navi {
+
+    margin-left: 4rem;
+  }
+}
+
+@media screen and (max-width: 1070px) {
+  .map-Navi {
+
+    margin-left: 3rem;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .map-Navi {
+
+    margin-left: 2rem;
+  }
+}
+/* =========================
+   MOBILE MODE
+========================= */
+@media screen and (max-width: 790px) {
+
+  .map-Navi {
+    width: 100%;
+    height: 0;
+    padding: 0;
+    margin-left: 0;
+    top: 0;
+  }
+
+  .top-navi {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    padding: 1rem 2rem;
+    border-radius: 0;
+  }
+
+  .topRight_navi {
+    flex-direction: row;
+    gap: 1rem;
+    transform: scaleX(-1);
+  }
+
+  .logo {
+    display: flex;
+  }
+
+  /* bottom nav becomes mobile bar */
+  .bottom-navi {
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    border-top: 2px solid #fff;
+    z-index: 5;
+    margin-top: -10px;
+    opacity: 0;
+    display: none;
+  }
+
+  .bottom-navi.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .ActiveNav {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   .BottomIconName {
     font-size: 11px;
   }
 
-  .user, .list, .eye {
-  border-bottom: none; ;
-  gap: 0.5rem;
+  .user,
+  .list,
+  .eye {
+    border-bottom: none;
+    gap: 0.5rem;
+  }
 }
-}
-
-
-
 
 </style>
