@@ -188,12 +188,12 @@ export default {
 
           <div class="topRight_navi">
             <div class="humber" @click="toggleBottomNav">
-              <Menu :size="20" :color="isDark ? 'white' : 'black'" />
+              <Menu :size="20" :color="iconColor" />
             </div>
 
             <div class="DarkmodeToglle" @click="toggleDarkMode">
-              <Sun v-if="isDark" :size="20" color="white" />
-              <Moon v-else :size="20" color="black" />
+              <Sun v-if="isDark" :size="20" :color="iconColor"/>
+              <Moon v-else :size="20" :color="iconColor" />
             </div>
           </div>
         </div>
@@ -202,19 +202,19 @@ export default {
         <div class="bottom-navi" :class="{ active: isBottomNavOpen }">
 
           <router-link to="/" @click="handleNavClick('about')" :class="{ ActiveNav: activeNav==='about' }">
-            <div class="user"><User :color="iconColor"/><div class="BottomIconName">About</div></div>
+            <div class="user"><User :color="iconColor" :size="20"/><div class="BottomIconName">About</div></div>
           </router-link>
 
           <router-link to="/resume" @click="handleNavClick('resume')" :class="{ ActiveNav: activeNav==='resume' }">
-            <div class="list"><List :color="iconColor"  /><div class="BottomIconName">Resume</div></div>
+            <div class="list"><List :color="iconColor" :size="20"  /><div class="BottomIconName">Resume</div></div>
           </router-link>
 
           <router-link to="/works" @click="handleNavClick('works')" :class="{ ActiveNav: activeNav==='works' }">
-            <div class="eye"><Eye :color="iconColor"/><div class="BottomIconName">Projects</div></div>
+            <div class="eye"><Eye :color="iconColor" :size="20" /><div class="BottomIconName">Projects</div></div>
           </router-link>
 
           <router-link to="/contact" @click="handleNavClick('contact')" :class="{ ActiveNav: activeNav==='contact' }">
-            <div class="airplane"><Send :color="iconColor"/><div class="BottomIconName">Contact</div></div>
+            <div class="airplane"><Send :color="iconColor" :size="20"/><div class="BottomIconName">Contact</div></div>
           </router-link>
 
         </div>
@@ -231,32 +231,32 @@ export default {
 
         <div class="topRight_navi">
           <div class="humber" @click="toggleBottomNav">
-            <Menu :size="20" />
+            <Menu :size="20" :color="iconColor"/>
           </div>
 
           <div class="DarkmodeToglle" @click="toggleDarkMode">
-            <Sun v-if="isDark" />
-            <Moon v-else />
+            <Sun v-if="isDark" :size="20" :color="iconColor"/>
+            <Moon v-else :size="20" :color="iconColor"/>
           </div>
         </div>
       </div>
 
       <div class="bottom-navi" :class="{ active: isBottomNavOpen }">
 
-        <router-link to="/" @click="handleNavClick('about')" class="text">
-          <div class="user"><User class="Icon" :color="iconColor"/><div>About</div></div>
+        <router-link to="/" @click="handleNavClick('about')" class="text" :class="{ ActiveNav: activeNav==='about' }">
+          <div class="user"><User class="Icon" :size="20"  :color="iconColor"/><div class="BottomIconName">About</div></div>
         </router-link>
 
-        <router-link to="/resume" @click="handleNavClick('resume')" class="text">
-          <div class="list"><List class="Icon" :color="iconColor" /><div>Resume</div></div>
+        <router-link to="/resume" @click="handleNavClick('resume')" class="text" :class="{ ActiveNav: activeNav==='resume' }">
+          <div class="list"><List class="Icon" :size="20"  :color="iconColor" /><div class="BottomIconName">Resume</div></div>
         </router-link>
 
-        <router-link to="/works" @click="handleNavClick('works')" class="text">
-          <div class="eye"><Eye class="Icon" :color="iconColor" /><div>Projects</div></div>
+        <router-link to="/works" @click="handleNavClick('works')" class="text" :class="{ ActiveNav: activeNav==='works' }">
+          <div class="eye"><Eye class="Icon" :size="20"  :color="iconColor" /><div class="BottomIconName">Projects</div></div>
         </router-link>
 
-        <router-link to="/contact" @click="handleNavClick('contact')" class="text">
-          <div class="airplane"><Send class="Icon" :color="iconColor"/><div>Contact</div></div>
+        <router-link to="/contact" @click="handleNavClick('contact')" class="text" :class="{ ActiveNav: activeNav==='contact' }">
+          <div class="airplane"><Send class="Icon" :size="20" :color="iconColor"/><div class="BottomIconName">Contact</div></div>
         </router-link>
 
       </div>
@@ -269,6 +269,12 @@ export default {
 
 
 <style scoped>
+
+.ActiveNav {
+  background-color: green;
+  width: 100%;
+  border-radius: 5px;
+}
 
 /* =========================
    GLOBAL NAV WRAPPER
@@ -346,8 +352,7 @@ export default {
 
 /* icon label */
 .BottomIconName {
-  font-size: 12px;
-  text-transform: uppercase;
+  font-size: 0.80rem;
   color: var(--text-color);
 }
 
@@ -387,16 +392,13 @@ export default {
   color: #fff;
 }
 
-/* active open state */
-.bottom-navi.active {
-  top: 0;
-  opacity: 1;
-}
 
 /* links */
 .bottom-navi a {
   text-decoration: none;
   cursor: pointer;
+    width: 100%;
+  display: flex;
 }
 
 /* =========================
@@ -580,7 +582,7 @@ export default {
   }
 
   .BottomIconName {
-    font-size: 11px;
+    font-size: 0.50rem;
   }
 
   .user,
