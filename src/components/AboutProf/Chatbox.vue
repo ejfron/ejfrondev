@@ -235,6 +235,7 @@ const latestButtons = computed(() => {
   bottom: 20px;
   right: 20px;
   z-index: 9999;
+
 }
 
 /* Toggle button */
@@ -246,6 +247,7 @@ const latestButtons = computed(() => {
   border-radius: 50%;
   cursor: pointer;
   position: relative;
+  border: 0.2px solid #b7f8b71b;
 }
 
 .notif {

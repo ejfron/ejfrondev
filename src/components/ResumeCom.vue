@@ -114,9 +114,9 @@
     
     <span class="skill-tag">
         
-            <i class="devicon-mysql-original"></i>
+            <i class="devicon-postgresql-plain"></i>
           
-        <div class="PG">MySQL</div>
+        <div class="PG">PostgreSQL</div>
     </span>
     <span class="skill-tag">
         
@@ -213,9 +213,30 @@
                     </div>
 
                     <div class="wrapSecProject">
-                        <div class="wrapProjectHead">3D TourGuide Melbourne Hotel</div>
+                        <div class="wrapProjectHead">Resume Builder</div>
                         <div class="wrapProjectDesc">
-                            Responsible for designing and implementing visually engaging, user-friendly interfaces, developing an immersive 3D tour website for virtual exploration. The front-end design seamlessly integrated 3D elements for a realistic user experience.
+                            Developed a user-friendly resume builder website using Nuxtjs, Tailwind CSS, and TypeScript. The platform allows users to create and customize their resumes with ease, providing an intuitive interface for inputting personal information, work experience, education, and skills.
+                        </div>
+                    </div>
+
+                     <div class="wrapSecProject">
+                        <div class="wrapProjectHead">Water Management System</div>
+                        <div class="wrapProjectDesc">
+                            Developed a water management system using Nuxtjs, PostgreSQL, Tailwind CSS, TypeScript, Express, and Capacitor. The system allows users to monitor and manage water usage efficiently, providing features such as real-time data tracking, usage analytics, and automated alerts for optimal water conservation.
+                        </div>
+                    </div>
+
+                     <div class="wrapSecProject">
+                        <div class="wrapProjectHead">Mobile Food App Scanner</div>
+                        <div class="wrapProjectDesc">
+                            Created a food app scanner using Vuejs, Tailwind CSS, JavaScript, Capacitor, and Express. The app allows users to scan food items to retrieve nutritional information, track dietary intake, and make informed food choices for a healthier lifestyle.
+                        </div>
+                    </div>
+
+                     <div class="wrapSecProject">
+                        <div class="wrapProjectHead">Ticketing Management System</div>
+                        <div class="wrapProjectDesc">
+                            Developed a ticketing system using Nuxtjs, PostgreSQL, Tailwind CSS, TypeScript, and Express. The system allows users to create, manage, and track support tickets efficiently, providing a streamlined solution for customer service and issue resolution.
                         </div>
                     </div>
 
