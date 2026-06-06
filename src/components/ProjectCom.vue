@@ -68,12 +68,10 @@ export default {
         {
           title: "Water Management System",
           desc: "Manage and track water usage and quality.",
-          category: "Freelance",
-          status: "in-progress",
-          tech: ["Nuxt.js", "Express", "Tailwind", "postgreSQL", "Capacitor"],
-          link: "",
-          DesStatushead: "In progress",
-          DesStatus: "in progress"
+          category: "Freelance"
+          tech: ["Nuxt.js", "Tailwind", "postgreSQL", "Supabase"],
+          link: "https://hydrix-solution.vercel.app/",
+  
         }
       ]
     };
